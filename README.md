@@ -4,6 +4,8 @@ A secure, mobile-friendly video player built using **Expo (React Native)** for t
 Features dynamic watermarking, screenshot detection, playback restrictions in secure mode, and a clean UI.
 
 ---
+# Architecture of the App
+![App Screenshot](./architecture.png)
 
 ## Features
 
