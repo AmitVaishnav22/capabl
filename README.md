@@ -1,152 +1,174 @@
 # Secure Video Player App
 
-This is a secure, mobile-friendly video player built using **Expo (React Native)** for the MEL Labs internship assessment. It features dynamic watermarking, screenshot detection, playback restrictions in secure mode, and a clean UI.
+A secure, mobile-friendly video player built using **Expo (React Native)** for the MEL Labs internship assessment.
+Features dynamic watermarking, screenshot detection, playback restrictions in secure mode, and a clean UI.
 
 ---
 
-## Features Implemented
+## Features
 
 ###  Security
--  Dynamic watermark (username + timestamp, updates every 30s)
--  Watermark shuffles position to prevent cropping
--  Screenshot detection with alert + pause
--  Screenshot count tracking (session-wise)
+
+* Dynamic watermark with username and timestamp (updates every 30s)
+* Watermark shuffles position periodically to prevent cropping
+* Screenshot detection with:
+
+  * Warning popup
+  * Automatic video pause
+  * Session-based screenshot count tracking
 
 ###  Video Player
--  Plays `.mp4` videos (web & mobile compatible)
--  Full playback controls (play/pause, seek, volume)
--  Fullscreen support
--  Replaces native controls in `secureMode` with:
-  - 5s rewind
-  - ▶/⏸ play-pause
 
-### Additional Features
--  Settings screen for watermark + secureMode toggle
--  Status screen shows:
-  - Screenshot protection ON/OFF
-  - Watermark settings
-  - Screenshot count
+* Supports `.mp4` playback (web and mobile compatible)
+* Full native playback controls:
+
+  * Play/Pause
+  * Seek bar
+  * Volume control
+  * Fullscreen support
+* Secure Mode (Custom Controls):
+
+  *  Rewind 10s/5s
+  * ▶/⏸ Play/Pause toggle
+
+###  Additional Screens
+
+* **Settings Screen**:
+
+  * Toggle watermark
+  * Toggle secure mode
+* **Status Screen**:
+
+  * Screenshot protection ON/OFF
+  * Current watermark info
+  * Screenshot count
 
 ---
 
 ## 🛠 Tech Stack
 
-- React Native (Expo)
-- `expo-av` for video playback
-- `expo-media-library` for screenshot polling
-- React Context API for global state management
+| Area                 | Tool                 |
+| -------------------- | -------------------- |
+| Frontend             | Expo (React Native)  |
+| Video Playback       | `expo-av`            |
+| Screenshot Detection | `expo-media-library` |
+| State Management     | React Context API    |
 
 ---
 
 ##  Setup Instructions
 
-Clone the repository:
+1. **Clone the repository**
 
-```bash
-git clone https://github.com/AmitVaishnav22/capabl.git
-cd secure-video-app
+   ```bash
+   git clone https://github.com/AmitVaishnav22/capabl.git
+   cd secure-video-app
+   ```
 
-Install dependencies:
+2. **Install dependencies**
 
-bash
-Copy
-Edit
-npm install
-Run the app:
+   ```bash
+   npm install
+   ```
 
-bash
-Copy
-Edit
-npx expo start
-For web testing: press w
+3. **Run the app**
 
-For device: scan QR with Expo Go app
+   ```bash
+   npx expo start
+   ```
 
-How to Test Screenshot Detection
-Screenshot detection only works on real devices (not web or emulator)
+4. **Testing:**
 
-Run the app on a physical device using Expo Go
+   * Web: Press `w` in the terminal
+   * Mobile: Scan QR code using Expo Go app
 
-Play the video in Player Screen
+---
 
-Take a screenshot
+##  Screenshot Detection Notes
 
-The app will:
+Screenshot detection **only works on physical devices** (not on web or emulators).
 
-Show a warning popup
+To test:
 
-Pause the video
+1. Run the app on a real device
+2. Go to the video player screen
+3. Take a screenshot
+4. You should see:
 
-Increment screenshot attempt count
+   * A warning popup
+   * Video paused
+   * Screenshot count incremented
 
-Known Limitations
-Screenshot detection is a workaround using MediaLibrary; native prevention is not possible on Expo.
+---
 
-Fast-forward restriction based on manual position checking.
+## Known Limitations
 
-Does not support local file uploads (sample video only).
+* Screenshot detection uses polling, not native APIs
+* Fast-forward restriction is manually enforced
+* No support for user video uploads (uses a fixed sample video)
 
-Demo Video
-Watch Demo
-(Duration: ~3 minutes)
+---
 
-Author
-Amit Vaishnav
-LinkedIn
+##  Demo
+
+🎥 **Watch Demo** (Duration: \~3 minutes)
+\[Demo Link Placeholder]
+
+---
+
+##  Author
+
+**Amit Vaishnav**
+[LinkedIn](https://www.linkedin.com/in/amit-vaishnav-678b04236/)
 Built for MEL Labs Internship Assessment
 
+---
 
+##  Technical Notes
+
+###  Architecture Decisions
+
+* Used Expo for fast cross-platform development & web testing
+* React Context for global state: `username`, `secureMode`, `screenshotCount`
+* Main Components:
+
+  * `VideoPlayer`: Handles video, watermark, and secure controls
+  * `PlayScreen`: Orchestrates screenshot detection & secure logic
+  * `SettingsScreen`: Input for username & toggle secure mode
+  * `StatusScreen`: Shows live protection and session info
+  * `ScreenShotDetector`: Polls the media library every 3s
+
+###  Security Strategy
+
+####  Dynamic Watermarking
+
+* Shows username + timestamp
+* Repositions every 30s to avoid cropping
+* Semi-transparent overlay
+
+####  Screenshot Detection
+
+* Uses `expo-media-library` to check for new screenshots
+* Shows alert, pauses video, and logs attempt count
+
+#### ⏯ Playback Restrictions
+
+* Native controls disabled in secure mode
+* Custom play/pause and rewind buttons shown
+* Blocks fast-forward based on playback delta
+
+###  What I’d Improve with More Time
+
+* Use Android `FLAG_SECURE` for native screenshot blocking
+* Persist data using `AsyncStorage` or cloud sync
+* Support local video selection or upload
+* Better error handling and automated testing
 
 ---
 
-#  `tech_notes.md`
+##  Tested On
 
-```md
-# Technical Notes – Secure Video App
+*  Web (Chrome, via Expo)
+*  Android (Expo Go)
+*  iOS not tested (assumed compatible)
 
-## 🏛 Architecture Decisions
-
-- **Expo (React Native)** was chosen for its fast setup, cross-platform support, and ease of deployment.
-- Used **React Context API** for managing global settings like `username`, `secureMode`, and `screenshotCount`.
-- **Component Structure**:
-  - `VideoPlayer`: Core video component with watermark overlay + secure mode handling
-  - `PlayScreen`: Orchestrates screenshot detection and playback restriction
-  - `SettingsScreen`: Updates watermark and security toggle
-  - `StatusScreen`: Shows real-time session info
-  - `ScreenShotDetector`: Utility polling `MediaLibrary` every 3s
-
----
-
-##  Security Approach
-
-- **Dynamic Watermarking**:
-  - Watermark contains username + timestamp
-  - Changes position every 30 seconds to avoid cropping
-  - Semi-transparent overlay styled via `rgba`
-
-- **Screenshot Detection**:
-  - Uses `expo-media-library` to scan new screenshots every 3 seconds
-  - Displays warning + pauses video
-  - Updates screenshot count via context
-
-- **Playback Restrictions (Secure Mode)**:
-  - Disables native controls
-  - Replaces with custom play/pause and 10s rewind
-  - Blocks excessive fast-forwarding by monitoring playback delta
-
----
-
-## What I’d Improve With More Time
-
-- Switch to native build and use native screenshot detection APIs (e.g., Android `FLAG_SECURE`)
-- Add persistent storage using `AsyncStorage` or backend sync
-- Support user video uploads or video list picker
-- Improve test coverage and error handling
-
----
-
-## Notes
-
-- Tested on Web and Android using Expo Go
-- Used `uri`-based video source for web compatibility
-- Designed UI to be clean and mobile-friendly with touch-safe buttons
