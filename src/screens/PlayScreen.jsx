@@ -4,7 +4,7 @@ import { ScreenShotDetector } from './utils/ScreenShotDetector';
 import VideoPlayer from '../components/VideoPlayer';
 import { SettingsContext } from '../context/SettingsContext';
 
-export default function PlayScreen() {
+function PlayScreen() {
   const videoRef = useRef(null);
 
   const {
@@ -50,3 +50,5 @@ export default function PlayScreen() {
     />
   );
 }
+
+export default PlayScreen;

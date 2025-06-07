@@ -1,6 +1,6 @@
 import * as MediaLibrary from 'expo-media-library';
 
-let lastCheckedTime = Date.now();
+let lastCheckedTime = Date.now(); // start with current time and update on detection
 
 const ScreenShotDetector = ({ onScreenshotDetected }) => {
   const intervalId = setInterval(async () => {

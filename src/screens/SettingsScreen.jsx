@@ -33,8 +33,6 @@ function SettingsScreen({ navigation }) {
     </View>
   );
 }
-
-export default SettingsScreen;
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, justifyContent: 'center' },
   label: { fontSize: 16, marginBottom: 8 },
@@ -52,3 +50,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default SettingsScreen;

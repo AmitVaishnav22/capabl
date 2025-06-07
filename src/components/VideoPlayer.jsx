@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video } from 'expo-av';
+import React from 'react'
 
-export default function VideoPlayer({ source, watermarkText, videoRef, onPlaybackStatusUpdate, secureMode }) {
+function VideoPlayer({ source, watermarkText, videoRef, onPlaybackStatusUpdate, secureMode }) {
   const [status, setStatus] = useState({});
   const [timestamp, setTimestamp] = useState(Date.now());
   const [watermarkPosition, setWatermarkPosition] = useState({ top: '40%', left: '25%' });
@@ -13,7 +14,7 @@ export default function VideoPlayer({ source, watermarkText, videoRef, onPlaybac
       const positions = [
         { top: '10%', left: '10%' },
         { top: '40%', left: '25%' },
-        { top: '70%', left: '60%' },
+        { top: '70%', left: '60%' },       // Random positions for watermark
         { top: '30%', left: '70%' },
         { top: '50%', left: '40%' }
       ];
@@ -23,7 +24,7 @@ export default function VideoPlayer({ source, watermarkText, videoRef, onPlaybac
   }, []);
 
   const handlePlayPause = async () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current) return;      
     const currentStatus = await videoRef.current.getStatusAsync();
     currentStatus.isPlaying ? videoRef.current.pauseAsync() : videoRef.current.playAsync();
   };
@@ -31,13 +32,13 @@ export default function VideoPlayer({ source, watermarkText, videoRef, onPlaybac
   const handleRewind = async () => {
     if (!videoRef.current) return;
     const currentStatus = await videoRef.current.getStatusAsync();
-    const newPos = Math.max(0, currentStatus.positionMillis - 5000); 
+    const newPos = Math.max(0, currentStatus.positionMillis - 5000);  // For rewind 5 seconds
     await videoRef.current.setPositionAsync(newPos);
   };
   const handleFoward = async () => {
     if (!videoRef.current) return;
     const currentStatus = await videoRef.current.getStatusAsync();
-    const newPos = Math.min(currentStatus.durationMillis, currentStatus.positionMillis + 5000); 
+    const newPos = Math.min(currentStatus.durationMillis, currentStatus.positionMillis + 5000); // For forward 5 seconds
     await videoRef.current.setPositionAsync(newPos);
   }
 
@@ -110,3 +111,4 @@ const styles = StyleSheet.create({
 });
 
 
+export default VideoPlayer;
