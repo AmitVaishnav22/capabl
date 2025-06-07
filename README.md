@@ -29,7 +29,7 @@ Features dynamic watermarking, screenshot detection, playback restrictions in se
 * Secure Mode (Custom Controls):
 
   *  Rewind 10s/5s
-  * ▶/⏸ Play/Pause toggle
+  * Play/Pause toggle
 
 ###  Additional Screens
 
@@ -111,7 +111,7 @@ To test:
 
 ##  Demo
 
-🎥 **Watch Demo** (Duration: \~3 minutes)
+**Watch Demo** (Duration: \~3 minutes)
 \[Demo Link Placeholder]
 
 ---
@@ -151,7 +151,7 @@ Built for MEL Labs Internship Assessment
 * Uses `expo-media-library` to check for new screenshots
 * Shows alert, pauses video, and logs attempt count
 
-#### ⏯ Playback Restrictions
+#### Playback Restrictions
 
 * Native controls disabled in secure mode
 * Custom play/pause and rewind buttons shown
