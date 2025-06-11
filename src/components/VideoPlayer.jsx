@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video } from 'expo-av';
-import React from 'react'
 
 function VideoPlayer({ source, watermarkText, videoRef, onPlaybackStatusUpdate, secureMode }) {
   const [status, setStatus] = useState({});

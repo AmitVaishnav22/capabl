@@ -1,4 +1,4 @@
-import Reac,{useContext} from 'react';
+import React,{useContext} from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SettingsContext } from '../context/SettingsContext';
 

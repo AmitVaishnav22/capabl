@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useContext,useState } from 'react';
 import { Alert } from 'react-native';
-import { ScreenShotDetector } from './utils/ScreenShotDetector';
+import { ScreenShotDetector } from '../utils/ScreenShotDetector';
 import VideoPlayer from '../components/VideoPlayer';
-import { SettingsContext } from '../context/SettingsContext';
+import { SettingsContext } from '../context/SettingsContext.js';
 
 function PlayScreen() {
   const videoRef = useRef(null);
